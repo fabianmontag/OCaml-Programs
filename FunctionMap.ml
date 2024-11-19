@@ -10,7 +10,9 @@ let delete map k =
     
 let rename map k kn =
     let v = map k in
-    fun k2 -> if k2 = kn then v else (delete map k) k2;;
+    match v with
+    | None -> map
+    | _ -> fun k2 -> if k2 = kn then v else (delete map k) k2;;
 
 (* testing *)
 let map2 = empty ();;
@@ -33,3 +35,7 @@ let map6 = rename map5 8897 1337;;
 map6 1337;;
 map6 8897;;
 map6 42;;
+let map7 = rename map6 42 1337;;
+map7 1337;;
+map7 8897;;
+map7 42;;
