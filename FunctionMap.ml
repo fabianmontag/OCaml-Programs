@@ -10,22 +10,26 @@ let delete map k =
     
 let rename map k kn =
     let v = map k in
-    match v with
-    | None -> map
-    | Some v -> fun k2 -> if k2 = kn then Some v else (delete map k) k2;;
+    fun k2 -> if k2 = kn then v else (delete map k) k2;;
 
-let map = empty ();;
-map;;
-let map = update map 5 1337;;
-lookup map 5;;
-let map = update map 42 101;;
-lookup map 42;;
-lookup map 101;;
-delete map 42;;
-let map = update map 42 101;;
-let map = delete map 42;;
-lookup map 42;;
-lookup map 5;;
-let map = rename map 5 102;;
-lookup map 5;;
-lookup map 102;;
+(* testing *)
+let map2 = empty ();;
+map2 1337;;
+let map3 = update map2 1337 10;;
+map3 1337;;
+let map4 = update map3 8897 20;;
+map4 1337;;
+map4 8897;;
+map4 42;;
+let map4 = update map3 8897 42;;
+map4 1337;;
+map4 8897;;
+map4 42;;
+let map5 = delete map4 1337;;
+map5 1337;;
+map5 8897;;
+map5 42;;
+let map6 = rename map5 8897 1337;;
+map6 1337;;
+map6 8897;;
+map6 42;;
